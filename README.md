@@ -1,188 +1,152 @@
-# 🔐 Ezshare
+# Ezshare - Secure File Sharing Application
 
-VaultShare is a secure and simple Django-based file sharing platform. Authenticated users can upload files, generate unique download links, and optionally set an expiry duration. Built for privacy, speed, and ease of use.
----
+A modern, secure file sharing application built with Django and vanilla JavaScript. Ezshare provides a beautiful, production-ready interface for uploading, managing, and sharing files with JWT-based authentication.
 
-## 🚀 Features
+## ✨ Features
 
-- 🔐 **User Authentication** (Register/Login/Logout)
-- 📤 **File Uploads** with size and type validation
-- 🔗 **Unique Download Links** (Shareable)
-- ⏳ **Link Expiration** Support (optional)
-- 🧹 **Auto Cleanup** with Celery & Redis
-- 📦 Supports **local** and **S3 file storage**
-- ⚙️ **Admin Panel** for file management
-- 🌐 **Dockerized** and ready for deployment
+### 🔐 Authentication & Security
+- JWT-based authentication with access and refresh tokens
+- Secure user registration and login
+- Token-based API protection
+- User-specific file storage and access control
 
----
+### 📁 File Management
+- **Drag & Drop Upload**: Intuitive file upload with visual feedback
+- **Multi-file Support**: Upload multiple files simultaneously
+- **File Organization**: User-specific file storage with metadata tracking
+- **Download Options**: Individual file downloads or ZIP bundling for multiple files
+- **File Statistics**: Track file sizes, upload dates, and download counts
 
-## 📸 Demo
+### 🎨 User Interface
+- **Modern Design**: Glassmorphism UI with gradient backgrounds
+- **Responsive Layout**: Works seamlessly on desktop, tablet, and mobile
+- **Real-time Feedback**: Toast notifications and loading states
+- **Interactive Elements**: Hover effects, animations, and micro-interactions
+- **File Management**: Select, download, and delete files with ease
 
-![Demo GIF](https://yourdomain.com/demo.gif)  
-🔗 [Live Demo](https://vaultshare.yourdomain.com)
+### 📊 Dashboard Features
+- User statistics (total files, storage used, download count)
+- File grid with search and filter capabilities
+- Bulk operations (select all, download multiple)
+- File type recognition with appropriate icons
 
----
+## 🛠️ Tech Stack
 
-## ⚙️ Tech Stack
+### Backend
+- **Django 4.2.7** - Web framework
+- **Django REST Framework 3.14.0** - API development
+- **Django Simple JWT 5.3.0** - JWT authentication
+- **Django CORS Headers 4.3.1** - Cross-origin resource sharing
+- **Pillow 10.0.1** - Image processing
+- **Python Decouple 3.8** - Environment variable management
 
-| Layer       | Technology                    |
-|-------------|-------------------------------|
-| Backend     | Django, DRF                   |
-| Database    | PostgreSQL / SQLite (dev)     |
-| Asynchronous| Celery + Redis                |
-| Storage     | Local / AWS S3                |
-| Auth        | Django Sessions / JWT (opt.)  |
-| Deployment  | Docker, Gunicorn, Nginx       |
+### Frontend
+- **HTML5** - Semantic markup
+- **CSS3** - Modern styling with flexbox/grid
+- **Vanilla JavaScript** - Interactive functionality
+- **Inter Font** - Typography
 
----
+### Database
+- **SQLite** (development) - Easily configurable for PostgreSQL/MySQL in production
 
-## 🛠️ Installation
+## 📁 Project Structure
 
-### 🔧 1. Clone the Repository
-
-```bash
-git clone https://github.com/yourusername/vaultshare.git
-cd vaultshare
-````
-
-### 🧪 2. Setup Virtual Environment
-
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+ezshare/
+├── ezshare/                    # Main Django project
+│   ├── __init__.py
+│   ├── settings.py            # Django settings
+│   ├── urls.py                # Main URL configuration
+│   └── wsgi.py                # WSGI configuration
+├── accounts/                   # User authentication app
+│   ├── models.py              # Custom User model
+│   ├── serializers.py         # DRF serializers
+│   ├── views.py               # Authentication views
+│   ├── urls.py                # Auth URL patterns
+│   └── admin.py               # Admin configuration
+├── files/                      # File management app
+│   ├── models.py              # File and ShareLink models
+│   ├── serializers.py         # File serializers
+│   ├── views.py               # File management views
+│   ├── urls.py                # File URL patterns
+│   └── admin.py               # File admin interface
+├── templates/                  # HTML templates
+│   └── index.html             # Main application template
+├── static/                     # Static files
+│   ├── css/
+│   │   └── style.css          # Application styles
+│   └── js/
+│       └── main.js            # Frontend JavaScript
+├── media/                      # User uploaded files
+├── requirements.txt            # Python dependencies
+├── manage.py                   # Django management script
+├── .env.example               # Environment variables template
+└── README.md                  # Project documentation
 ```
 
-### 📦 3. Install Requirements
+## 🚀 Installation & Setup
 
+### Prerequisites
+- Python 3.8+
+- pip (Python package manager)
+
+### 1. Clone the Repository
+```bash
+git clone <repository-url>
+cd ezshare
+```
+
+### 2. Create Virtual Environment
+```bash
+python -m venv venv
+
+# On Windows
+venv\Scripts\activate
+
+```
+
+### 3. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 🔐 4. Configure `.env`
-
-Create a `.env` file in the project root:
-
-```env
-DEBUG=True
-SECRET_KEY=your_secret_key
-ALLOWED_HOSTS=localhost,127.0.0.1
-DATABASE_URL=sqlite:///db.sqlite3
-USE_S3=False
-AWS_ACCESS_KEY_ID=your_key
-AWS_SECRET_ACCESS_KEY=your_secret
-AWS_STORAGE_BUCKET_NAME=vaultshare-bucket
+### 4. Environment Configuration
+```bash
+cp .env.example .env
+# Edit .env file with your configuration
 ```
 
-### 🔄 5. Run Migrations
-
+### 5. Database Setup
 ```bash
+python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 🚀 6. Start Development Server
+### 6. Create Superuser (Optional)
+```bash
+python manage.py createsuperuser
+```
 
+### 7. Collect Static Files
+```bash
+python manage.py collectstatic
+```
+
+### 8. Run Development Server
 ```bash
 python manage.py runserver
 ```
 
----
+Visit `http://127.0.0.1:8000` to access the application.
 
-## 🐳 Docker Setup
 
-### Build & Start
+### Environment Variables
+See `.env.example` for all available configuration options.
 
-```bash
-docker-compose up --build
-```
+## 📝 License
 
-Access at `http://localhost:8000`
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## ✏️ File Upload Workflow
-
-1. User logs in and uploads file.
-2. File is stored securely (local/S3).
-3. A unique shareable link is generated.
-4. If expiry is set, link becomes invalid after deadline.
-5. Admins can monitor file logs.
-
----
-
-## 🧪 Running Tests
-
-```bash
-python manage.py test
-```
-
----
-
-## ✨ Screenshots
-
-> Upload a few key screenshots here
->
-> * Login Page
-> * Upload Interface
-> * Download Page
-
----
-
-## 🧹 Celery Cleanup (Optional)
-
-To run Celery for file expiry/deletion:
-
-```bash
-celery -A vaultshare worker --loglevel=info
-```
-
-And in another terminal:
-
-```bash
-celery -A vaultshare beat --loglevel=info
-```
-
-Make sure Redis is running.
-
----
-
-## 📂 Folder Structure
-
-```
-vaultshare/
-├── core/               # Main app for file logic
-├── users/              # User authentication
-├── templates/          # HTML templates
-├── static/             # Static files (CSS, JS)
-├── media/              # Uploaded files (dev)
-├── vaultshare/         # Django project settings
-├── docker-compose.yml
-├── requirements.txt
-```
-
----
-
-## 🧑‍💻 Contributing
-
-1. Fork the repo
-2. Create your branch: `git checkout -b feature/awesome`
-3. Commit: `git commit -m 'Add awesome feature'`
-4. Push: `git push origin feature/awesome`
-5. Open a PR 🙌
-
----
-
-## 📄 License
-
-MIT License © [Your Name](https://github.com/yourusername)
-
----
-
-## 🔗 Links
-
-* 🔥 [Live App](https://vaultshare.yourdomain.com)
-* 📚 [Documentation](https://docs.yourdomain.com)
-* 🧠 [About the Author](https://yourportfolio.com)
-
----
-
-
+**Built with ❤️ using Django.**

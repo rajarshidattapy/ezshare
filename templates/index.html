@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezshare - Secure File Sharing</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <h1>Ezshare</h1>
+                </div>
+                <div class="nav-actions">
+                    <div id="user-menu" class="user-menu" style="display: none;">
+                        <span id="user-name"></span>
+                        <button id="logout-btn" class="btn btn-outline">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Auth Section -->
+        <div id="auth-section" class="auth-section">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h2>Welcome to Ezshare</h2>
+                    <p>Secure file sharing made simple</p>
+                </div>
+                
+                <div class="auth-tabs">
+                    <button id="login-tab" class="tab-btn active">Login</button>
+                    <button id="register-tab" class="tab-btn">Register</button>
+                </div>
+
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+
+                <!-- Register Form -->
+                <form id="register-form" class="auth-form" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="register-first-name">First Name</label>
+                            <input type="text" id="register-first-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-last-name">Last Name</label>
+                            <input type="text" id="register-last-name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-username">Username</label>
+                        <input type="text" id="register-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password-confirm">Confirm Password</label>
+                        <input type="password" id="register-password-confirm" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main App Section -->
+        <div id="main-section" class="main-section" style="display: none;">
+            <!-- Stats Dashboard -->
+            <div class="stats-dashboard">
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <h3 id="total-files">0</h3>
+                        <p>Total Files</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="total-size">0 MB</h3>
+                        <p>Total Size</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="total-downloads">0</h3>
+                        <p>Downloads</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <div class="upload-container">
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-icon">📁</div>
+                        <h3>Drop files here or click to select</h3>
+                        <p>Support for multiple files</p>
+                        <input type="file" id="file-input" multiple hidden>
+                    </div>
+                    <button id="upload-btn" class="btn btn-primary" style="display: none;">Upload Files</button>
+                </div>
+            </div>
+
+            <!-- Files Section -->
+            <div class="files-section">
+                <div class="files-container">
+                    <div class="files-header">
+                        <h2>Your Files</h2>
+                        <div class="files-actions">
+                            <button id="select-all-btn" class="btn btn-outline">Select All</button>
+                            <button id="download-selected-btn" class="btn btn-secondary" style="display: none;">Download Selected</button>
+                        </div>
+                    </div>
+                    <div id="files-grid" class="files-grid">
+                        <!-- Files will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay" style="display: none;">
+            <div class="spinner"></div>
+            <p>Processing...</p>
+        </div>
+
+        <!-- Toast Messages -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
